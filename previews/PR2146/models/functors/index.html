@@ -118,26 +118,26 @@ julia&gt; struct Bar; x; end
 
 julia&gt; @functor Bar
 
-julia&gt; struct NoChildren; x; y; end
+julia&gt; struct TypeWithNoChildren; x; y; end
 
-julia&gt; m = Foo(Bar([1,2,3]), NoChildren(:a, :b))
-Foo(Bar([1, 2, 3]), NoChildren(:a, :b))
+julia&gt; m = Foo(Bar([1,2,3]), TypeWithNoChildren(:a, :b))
+Foo(Bar([1, 2, 3]), TypeWithNoChildren(:a, :b))
 
 julia&gt; fcollect(m)
 4-element Vector{Any}:
- Foo(Bar([1, 2, 3]), NoChildren(:a, :b))
+ Foo(Bar([1, 2, 3]), TypeWithNoChildren(:a, :b))
  Bar([1, 2, 3])
  [1, 2, 3]
- NoChildren(:a, :b)
+ TypeWithNoChildren(:a, :b)
 
 julia&gt; fcollect(m, exclude = v -&gt; v isa Bar)
 2-element Vector{Any}:
- Foo(Bar([1, 2, 3]), NoChildren(:a, :b))
- NoChildren(:a, :b)
+ Foo(Bar([1, 2, 3]), TypeWithNoChildren(:a, :b))
+ TypeWithNoChildren(:a, :b)
 
 julia&gt; fcollect(m, exclude = v -&gt; Functors.isleaf(v))
 2-element Vector{Any}:
- Foo(Bar([1, 2, 3]), NoChildren(:a, :b))
+ Foo(Bar([1, 2, 3]), TypeWithNoChildren(:a, :b))
  Bar([1, 2, 3])</code></pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="Functors.functor" href="#Functors.functor"><code>Functors.functor</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">Functors.functor(x) = functor(typeof(x), x)</code></pre><p>Returns a tuple containing, first, a <code>NamedTuple</code> of the children of <code>x</code> (typically its fields), and second, a reconstruction funciton. This controls the behaviour of <a href="#Functors.fmap"><code>fmap</code></a>.</p><p>Methods should be added to <code>functor(::Type{T}, x)</code> for custom types, usually using the macro <a href="#Functors.@functor"><code>@functor</code></a>.</p></div></section></article><article class="docstring"><header><a class="docstring-binding" id="Functors.fmapstructure" href="#Functors.fmapstructure"><code>Functors.fmapstructure</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia hljs">fmapstructure(f, x; exclude = isleaf)</code></pre><p>Like <a href="#Functors.fmap"><code>fmap</code></a>, but doesn&#39;t preserve the type of custom structs. Instead, it returns a <code>NamedTuple</code> (or a <code>Tuple</code>, or an array), or a nested set of these.</p><p>Useful for when the output must not contain custom structs.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; struct Foo; x; y; end
 
 julia&gt; @functor Foo
@@ -154,4 +154,4 @@ julia&gt; fmapstructure(println, m)
 6
 7
 8
-(x = nothing, y = Any[nothing, (nothing, nothing), (x = nothing, y = nothing)])</code></pre></div></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../nnlib/">« Low-level Operations – NNlib.jl</a><a class="docs-footer-nextpage" href="../../tutorials/linear_regression/">Linear Regression »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.23 on <span class="colophon-date" title="Monday 2 January 2023 10:08">Monday 2 January 2023</span>. Using Julia version 1.6.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+(x = nothing, y = Any[nothing, (nothing, nothing), (x = nothing, y = nothing)])</code></pre></div></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../nnlib/">« Low-level Operations – NNlib.jl</a><a class="docs-footer-nextpage" href="../../tutorials/linear_regression/">Linear Regression »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.24 on <span class="colophon-date" title="Sunday 5 March 2023 11:46">Sunday 5 March 2023</span>. Using Julia version 1.6.7.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
